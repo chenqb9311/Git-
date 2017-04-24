@@ -1,4 +1,4 @@
-# Git入门学习
+# Git学习笔记(可能存在较多的笔误，需要进一步检查更正)
 主要参考自：http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
 
 git设置：
@@ -34,12 +34,8 @@ git config --global user.email "email"
 6.撤销修改：撤销对文件的修改：git checkout -- readme.txt--->撤销对readme.txt文件的修改。
 	    撤销已add到暂存区的修改：git reset HEAD readme.txt--->把暂存区的修改回退到工作区。
 	    撤销已commit到分支上的修改：版本回退，前提是本地仓库还未提交到远程仓库。
-
-<<<<<<< HEAD
-7.删除文件：删除工作区的文件，rm -rf readme.txt，本地仓库会知道(git status)有文件被修改了，确实要删除这个文件，则git rm readme.txt从本地仓库中也删除，最后git commit -m "remove 	    readme.txt"清空工作区的修改；否则撤销删除（误删）git checkout -- readme.txt恢复到版本库的最新版本，注意只能恢复到最新版本，意味着最后一次提交后所做的修改就会丢失。
-=======
-8.删除文件：删除工作区的文件，rm -rf readme.txt，本地仓库会知道(git status)有文件被修改了，确实要删除这个文件，则git rm readme.txt从本地仓库中也删除，最后git commit -m "remove readme.txt"清空工作区的修改；否则撤销删除（误删）git checkout -- readme.txt恢复到版本库的最新版本，注意只能恢复到最新版本，意味着最后一次提交后所做的修改就会丢失。
->>>>>>> origin/master
+	    
+7.删除文件：删除工作区的文件，rm -rf readme.txt，本地仓库会知道(git status)有文件被修改了，确实要删除这个文件，则git rm readme.txt从本地仓库中也	   删除，最后git commit -m "remove readme.txt"清空工作区的修改；否则撤销删除（误删）git checkout -- readme.txt恢复到版本库的最新	                版本，注意只能恢复到最新版本，意味着最后一次提交后所做的修改就会丢失。
 
 上述是本地仓库的一些操作。
 
