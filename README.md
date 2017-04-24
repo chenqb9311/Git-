@@ -35,18 +35,22 @@ git config --global user.email "email"
 	    撤销已add到暂存区的修改：git reset HEAD readme.txt--->把暂存区的修改回退到工作区。
 	    撤销已commit到分支上的修改：版本回退，前提是本地仓库还未提交到远程仓库。
 
+<<<<<<< HEAD
 7.删除文件：删除工作区的文件，rm -rf readme.txt，本地仓库会知道(git status)有文件被修改了，确实要删除这个文件，则git rm readme.txt从本地仓库中也删除，最后git commit -m "remove 	    readme.txt"清空工作区的修改；否则撤销删除（误删）git checkout -- readme.txt恢复到版本库的最新版本，注意只能恢复到最新版本，意味着最后一次提交后所做的修改就会丢失。
+=======
+8.删除文件：删除工作区的文件，rm -rf readme.txt，本地仓库会知道(git status)有文件被修改了，确实要删除这个文件，则git rm readme.txt从本地仓库中也删除，最后git commit -m "remove readme.txt"清空工作区的修改；否则撤销删除（误删）git checkout -- readme.txt恢复到版本库的最新版本，注意只能恢复到最新版本，意味着最后一次提交后所做的修改就会丢失。
+>>>>>>> origin/master
 
 上述是本地仓库的一些操作。
+
 ////////////////////////////////////////////////////////////////////////////////////////
 
 下面开始本地仓库和远程仓库（Github）的协作。
 
 Git本地仓库与Github远程仓库通过ssh协议进行加密传输，需要进行设置。
-第1步：创建SSH Key。ssh-keygen -t rsa -C "youremail@example.com"；在用户主目录下生成.ssh隐藏目录，里面有两个文件id_rsa和id_rsa.pub，这两个是SSH的密钥对，id_rsa是私钥，不能泄露出去，        id_rsa.pub是公钥，可以放心的告诉别人。
+第1步：创建SSH Key。ssh-keygen -t rsa -C "youremail@example.com"；在用户主目录下生成.ssh隐藏目录，里面有两个文件id_rsa和id_rsa.pub，这两个是SSH的密钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心的告诉别人。
 第2步：登陆远程仓库GitHub，打开Account settings---->SSH Keys---->Add SSH Key:填写title,Key中粘贴公钥内容---->Add Key.
-       GitHub通过SSH Key（只要公钥）识别推送只能由我自己进行，别人不能冒充，如果有多台电脑要向一个远程仓库推送，只要把每台电脑的公钥都添加到GitHub中即可。
-       GitHub上免费托管的Git仓库，对所有人都是可见的（public选项），但只有自己才能修改。
+       GitHub通过SSH Key（只要公钥）识别推送只能由我自己进行，别人不能冒充，如果有多台电脑要向一个远程仓库推送，只要把每台电脑的公钥都添加到GitHub中即可。GitHub上免费托管的Git仓库，对所有人都是可见的（public选项），但只有自己才能修改。
 
 将本地Git仓库添加到远程仓库：
 为远程仓库GitHub设置好SSH Key后，就可以对本地Git仓库与远程仓库进行关联。
