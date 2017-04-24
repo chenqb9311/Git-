@@ -1,41 +1,44 @@
 # Git入门学习
 主要参考自：http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
 
-git设置：
-安装完git后的设置：
-git config --global user.name "username"
-git config --global user.email "email"
+1.git设置：
+	安装完git后，先要进行user.name和user.email的设置：
+		git config --global user.name "username"
+		git config --global user.email "email"
+		注意：--global是全局设置，username和email保存在了用户主目录下的.gitconfig文件中，对于当前用户的所有本地仓库全有效，倘若某个本地仓库要使用其它的username和email，只需要在为这个仓库设置时不加--global参数就可以了。
 
-1.创建git本地仓库：
-	新修建一个空目录;
- 	git init--->初始化为git可以管理的本地仓库，执行完后会在当前目录下出现一个隐藏目录.git，即本地仓库。
+2.创建git本地仓库：
+	新修建一个空目录; git init--->初始化为git可以管理的本地仓库，执行完后会在当前目录下出现一个隐藏目录.git，即本地仓库。
 
-2.创建文件readme.txt（一定是文本文件，不能是二进制文件）
+3.创建文件readme.txt（一定是文本文件，不能是二进制文件）
 	vi readme.txt--->添加文本，进行修改
-	git add readme.txt--->添加道.git目录中的暂存区stage
-	git commit -m "版本说明" --->提交到分支上去，HEAD指针指向当前的版本
-        Git的每次commit都会生成一个SHA-1 值（40位16进制表示），通常情况下不需要所有为来来唯一标识每次commit，可以为你的SHA-1值生成出简短且唯一的缩写。如果你传递 --abbrev-commit 给 		git log 命令，输出结果里就会使用简短且唯一的值；它默认使用七个字符来表示，不过必要时为了避免 SHA-1 的歧义，会增加字符数：
-	如：git log --abbrev-commit --pretty=oneline
+	git add readme.txt--->添加到.git目录中的暂存区stage，可以被Git管理
+	git commit -m "版本说明" --->提交到当前分支上去，HEAD指针指向当前分支的上最新提交版本
+    Git的每次commit都会生成一个SHA-1 值（40位16进制表示），通常情况下不需要所有位来唯一标识每次commit，可以为你的SHA-1值生成出简短且唯一的缩写。如果你传递 --abbrev-commit 给git log 命令，输出结果里就会使用简短且唯一的值；它默认使用七个字符来表示，不过必要时为了避免 SHA-1 的歧义，会增加字符数：
+	如：
+	git log --pretty=oneline --abbrev-commit
 	ca82a6d changed the version number
 	085bb3b removed unnecessary test code
 	a11bef0 first commit
-	通常在一个项目中，使用八到十个字符来避免SHA-1歧义已经足够了。最大的 Git 项目之一，Linux 内核，目前也只需要最长 40 个字符中的 12 个字符来保持唯一性。
+	通常在一个项目中，使用八到十个字符来避免SHA-1歧义已经足够了。最大的 Git 项目之一，Linux 内核，目前也只需要最长40个字符中的12个字符来保持唯一性。
 
-3.时光穿梭机：git diff readme.txt  /  git diff HEAD -- readme.txt--->查看版本库最新版本与当前修改后文件的差别
-	      git log--->查看历史提交  --pretty=oneline--->一行显示
-  	      git reflog--->查看历史命令
-  	      git reset --hard commitID--->穿梭到过去或重返回未来的某个版本
-  	      git reset --hard HEAD^--->回退到上一个版本，HEAD指向的版本代表当前版本，HEAD^代表上一个提交版本，HEAD^^代表上上一个提交版本，当然版本很多时就用HEAD～100表示之前的第100					个版本。
+4.时光穿梭机：
+     git diff readme.txt  /  git diff HEAD -- readme.txt--->查看版本库最新版本与当前修改后文件的差别
+	 git log--->查看历史提交  --pretty=oneline--->一行显示
+  	 git reflog--->查看历史命令
+  	 git reset --hard commitID--->穿梭到过去或重返回未来的某个版本
+  	 git reset --hard HEAD^--->回退到上一个版本，HEAD指向的版本代表当前版本，HEAD^代表上一个提交版本，HEAD^^代表上上一个提交版本，当然版本很多时就用HEAD～100表示之前的第100					
 
-4.Git中暂存区与分支的概念。
+5.Git中暂存区与分支的概念。
 
-5.Git管理的是修改，而不是文件，所以每次对文件的修改一定要先add到暂存区，然后才能commit到分支上，否则所做的修改就会丢失。
+6.Git管理的是修改，而不是文件，所以每次对文件的修改一定要先add到暂存区，然后才能commit到当前分支上，否则所做的修改就会丢失。
 
-6.撤销修改：撤销对文件的修改：git checkout -- readme.txt--->撤销对readme.txt文件的修改。
-	    撤销已add到暂存区的修改：git reset HEAD readme.txt--->把暂存区的修改回退到工作区。
-	    撤销已commit到分支上的修改：版本回退，前提是本地仓库还未提交到远程仓库。
+7.撤销修改：
+      撤销对文件的修改：git checkout -- readme.txt--->撤销对readme.txt文件的修改。
+	  撤销已add到暂存区的修改：git reset HEAD readme.txt--->把暂存区的修改回退到工作区。
+	  撤销已commit到分支上的修改：版本回退，前提是本地仓库还未提交到远程仓库。
 
-7.删除文件：删除工作区的文件，rm -rf readme.txt，本地仓库会知道(git status)有文件被修改了，确实要删除这个文件，则git rm readme.txt从本地仓库中也删除，最后git commit -m "remove 	    readme.txt"清空工作区的修改；否则撤销删除（误删）git checkout -- readme.txt恢复到版本库的最新版本，注意只能恢复到最新版本，意味着最后一次提交后所做的修改就会丢失。
+8.删除文件：删除工作区的文件，rm -rf readme.txt，本地仓库会知道(git status)有文件被修改了，确实要删除这个文件，则git rm readme.txt从本地仓库中也删除，最后git commit -m "remove 	    readme.txt"清空工作区的修改；否则撤销删除（误删）git checkout -- readme.txt恢复到版本库的最新版本，注意只能恢复到最新版本，意味着最后一次提交后所做的修改就会丢失。
 
 上述是本地仓库的一些操作。
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +54,7 @@ Git本地仓库与Github远程仓库通过ssh协议进行加密传输，需要�
 将本地Git仓库添加到远程仓库：
 为远程仓库GitHub设置好SSH Key后，就可以对本地Git仓库与远程仓库进行关联。
 首先要创建一个远程仓库，Create Repository，但这只是一个空的仓库，先要与本地仓库关联，然后才能把本地仓库的内容推送上去。
-git remote add origin git@github.com:chenqb9311/learn.git--->远程库名字默认是origin
+git remote add origin git@github.com:xxxxxx/learn.git--->远程库名字默认是origin   xxxxxx:GitHub账户名
 git push -u origin master--->把本地仓库的内容推送到远程仓库上去，实际上是把master分支推送上去。-u参数：我们第一次推送master分支时，不但会把本地master分支的内容推送到远程新的mater，还会把这两个master分支进行关联，从而实现跟踪。之后就不需要添加-u了，直接git push origin master就可以了。
 
 从远程仓库克隆到本地仓库：
@@ -237,3 +240,4 @@ git config --global alias.last 'log -1'
 而当前用户的Git配置文件放在用户主目录下的一个隐藏文件.gitconfig中，配置别名也可以直接修改这个文件，如果改错了，可以删掉文件重新通过命令配置。
 
 搭建Git服务器：以后有需要再学习。
+解决GitHub Desktop无法下载的问题：
